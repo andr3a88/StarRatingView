@@ -19,6 +19,25 @@ static const CGFloat kDefaultStarWidth = 16.0f;
 
 @implementation StarRatingView
 
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    
+    if(self = [super initWithCoder:aDecoder]) {
+        _starButtons = [[NSMutableArray alloc] initWithCapacity:5];
+        for (int i = 0; i < 5; i++) {
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            [button setFrame:self.frame];
+            [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            button.tag = i;
+            [self addSubview:button];
+            [_starButtons addObject:button];
+        }
+        
+        self.starWidth = kDefaultStarWidth;
+        self.rateEnabled = NO;
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
   return [self initWithFrame:frame rateEnabled:NO];
